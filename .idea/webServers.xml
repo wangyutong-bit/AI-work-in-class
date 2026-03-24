@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="07ca922a-9867-4977-9982-5a0d1611d06d" name="frp-arm.com">
+        <fileTransfer rootFolder="/home/learn" accessType="SFTP" host="frp-arm.com" port="40398" sshConfigId="d1778f0d-1378-4263-b6ec-5dd455a8228b" sshConfig="learn@frp-arm.com:40398 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
