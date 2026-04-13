@@ -11,8 +11,6 @@ from dotenv import load_dotenv, find_dotenv
 """
 从 .env 文件中加载环境变量
 """
-
-# 从 .env 文件中加载key
 if not load_dotenv(find_dotenv()):
     print("无法加载 .env 文件。")
 
