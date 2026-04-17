@@ -9,13 +9,13 @@ if not load_dotenv(find_dotenv()):
 
 # 创建 OpenAI API 客户端
 client = OpenAI(
-        api_key=os.getenv("DASHSCOPE_API_KEY"), # 如果您没有配置环境变量，请在此处用您的API Key进行替换
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",  # 填写DashScope SDK的base_url
+        api_key=os.getenv("SILICONFLOW_API_KEY"), # 如果您没有配置环境变量，请在此处用您的API Key进行替换
+        base_url="https://api.siliconflow.cn/v1",  # 填写DashScope SDK的base_url
     )
 
 
 # 从 OpenAI API 获取 LLM 生成的结果
-def get_completion_from_messages(messages, model="qwen-plus", temperature=0, max_tokens=1024):
+def get_completion_from_messages(messages, model="Qwen/Qwen2.5-7B-Instruct", temperature=0, max_tokens=1024):
     response = client.chat.completions.create(
         model=model,
         messages=messages,

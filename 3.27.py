@@ -1,12 +1,17 @@
+import os
+
 from openai import OpenAI
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())
 
 client = OpenAI(
-    api_key=os.getenv("BIGMODEL_API_KEY"),
-    base_url="https://open.bigmodel.cn/api/paas/v4/"
+    api_key=os.getenv("SILICONFLOW_API_KEY"),
+    base_url="https://api.siliconflow.cn/v1"
 )
 
 # 封装调用函数
-def get_completion(prompt, model="glm-5"):
+def get_completion(prompt, model=os.getenv("SILICONFLOW_MODEL", "deepseek-ai/DeepSeek-V3")):
     messages = [
         {"role": "user", "content": prompt}
     ]

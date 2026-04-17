@@ -2,17 +2,19 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 
 # 初始化OpenAI客户端
 client = OpenAI(
-    # 如果没有配置环境变量，请用阿里云百炼API Key替换：api_key="sk-xxx"
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+    # 如果没有配置环境变量，请先在 .env 中配置 SILICONFLOW_API_KEY
+    api_key=os.getenv("SILICONFLOW_API_KEY"),
+    base_url="https://api.siliconflow.cn/v1",
 )
 
 messages = [{"role": "user", "content": "你是谁"}]
 completion = client.chat.completions.create(
-    model="glm-5",
+    model=os.getenv("SILICONFLOW_REASONING_MODEL", "deepseek-ai/DeepSeek-R1"),
     messages=messages,
     # 通过 extra_body 设置 enable_thinking 开启思考模式
     extra_body={"enable_thinking": True},

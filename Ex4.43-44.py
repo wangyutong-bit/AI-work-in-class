@@ -1,14 +1,19 @@
 # 导入第三方库
+import os
+
 from openai import OpenAI
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())
 
 client = OpenAI(
-        api_key="sk-73982f4a504949569bb81827e84bace6", # 如果您没有配置环境变量，请在此处用您的API Key进行替换
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",  # 填写DashScope SDK的base_url
+        api_key=os.getenv("SILICONFLOW_API_KEY"), # 如果您没有配置环境变量，请在此处用您的API Key进行替换
+        base_url="https://api.siliconflow.cn/v1",  # 填写DashScope SDK的base_url
     )
 
 
 # 一个封装 OpenAI 接口的函数，参数为 Prompt，返回对应结果
-def get_completion(prompt, model="qwen2.5-72b-instruct"):  #qwen-turbo-2024-06-24出错
+def get_completion(prompt, model="Qwen/Qwen2.5-72B-Instruct"):  #qwen-turbo-2024-06-24出错
     messages = [{"role": "user", "content": prompt}]
     response = client.chat.completions.create(
         model=model,

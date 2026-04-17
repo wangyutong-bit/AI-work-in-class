@@ -10,8 +10,8 @@ if not load_dotenv(find_dotenv()):
 
 # 创建 OpenAI API 客户端
 client = OpenAI(
-        api_key="sk-73982f4a504949569bb81827e84bace6", # 如果您没有配置环境变量，请在此处用您的API Key进行替换
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",  # 填写DashScope SDK的base_url
+        api_key=os.getenv("SILICONFLOW_API_KEY"), # 如果您没有配置环境变量，请在此处用您的API Key进行替换
+        base_url="https://api.siliconflow.cn/v1",  # 填写DashScope SDK的base_url
     )
 
 
@@ -65,7 +65,7 @@ class FoodOrderChatbotClient:
         return {"role": "assistant", "content": assistant_output}
     
     # 从 OpenAI API 获取 LLM 生成的结果
-    def get_completion_from_messages(self, messages, model="qwen-plus", temperature=0):
+    def get_completion_from_messages(self, messages, model="Qwen/Qwen2.5-7B-Instruct", temperature=0):
         response = self.client.chat.completions.create(
             model=model,
             messages=messages,
