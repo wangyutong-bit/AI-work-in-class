@@ -3,8 +3,8 @@ from llm_client import invoke_text
 
 def main() -> None:
     response = invoke_text(
-        "你好，请用中文介绍一下你自己。",
-        model="Qwen/Qwen2.5-7B-Instruct",
+        "你是一名宋朝知识小助手，请列举 5 位宋朝著名诗人的名字。",
+        model="gpt-3.5-turbo",
         temperature=0.3,
     )
     print(response)

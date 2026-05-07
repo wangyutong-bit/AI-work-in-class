@@ -23,8 +23,8 @@ DEFAULT_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.siliconflow.cn/v1")
 DEFAULT_MODEL = os.getenv("LLM_MODEL", "Qwen/Qwen2.5-7B-Instruct")
 
 
-def _get_api_key() -> str:
-    api_key = (
+def _get_api_key(api_key: str | None = None) -> str:
+    api_key = api_key or (
         os.getenv("LLM_API_KEY")
         or os.getenv("SILICONFLOW_API_KEY")
         or os.getenv("DEEPSEEK_API_KEY")
@@ -43,6 +43,8 @@ def invoke_messages(
     model: str | None = None,
     temperature: float = 0,
     max_tokens: int | None = 1024,
+    base_url: str | None = None,
+    api_key: str | None = None,
 ) -> str:
     payload = {
         "model": model or DEFAULT_MODEL,
@@ -53,10 +55,10 @@ def invoke_messages(
         payload["max_tokens"] = max_tokens
 
     req = request.Request(
-        url=f"{DEFAULT_BASE_URL.rstrip('/')}/chat/completions",
+        url=f"{(base_url or DEFAULT_BASE_URL).rstrip('/')}/chat/completions",
         data=json.dumps(payload).encode("utf-8"),
         headers={
-            "Authorization": f"Bearer {_get_api_key()}",
+            "Authorization": f"Bearer {_get_api_key(api_key)}",
             "Content-Type": "application/json",
         },
         method="POST",
@@ -80,10 +82,14 @@ def invoke_text(
     model: str | None = None,
     temperature: float = 0,
     max_tokens: int | None = 1024,
+    base_url: str | None = None,
+    api_key: str | None = None,
 ) -> str:
     return invoke_messages(
         [{"role": "user", "content": prompt}],
         model=model,
         temperature=temperature,
         max_tokens=max_tokens,
+        base_url=base_url,
+        api_key=api_key,
     )

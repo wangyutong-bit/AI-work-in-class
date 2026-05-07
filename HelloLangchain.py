@@ -1,15 +1,10 @@
-from langchain_openai import ChatOpenAI
-
-from dotenv import load_dotenv, find_dotenv
-import os
-from openai import OpenAI
+from llm_client import invoke_text
 
 
-_ = load_dotenv(find_dotenv()) 
+def main() -> None:
+    response = invoke_text("你好，LangChain 是什么？请用中文简要介绍。", temperature=0.3)
+    print(response)
 
-model = ChatOpenAI(
-    api_key=os.getenv("SILICONFLOW_API_KEY"),  # 如果您没有配置环境变量，请在此处用您的API Key进行替换
-    base_url="https://api.siliconflow.cn/v1",  # 填写DashScope SDK的base_url
-    model="Qwen/Qwen2.5-7B-Instruct")
 
-print(model.invoke("你好, Langchain!").content)
+if __name__ == "__main__":
+    main()

@@ -1,13 +1,14 @@
-from langchain_openai import ChatOpenAI
+from llm_client import invoke_text
 
-from dotenv import load_dotenv, find_dotenv
-import os
 
-_ = load_dotenv(find_dotenv()) 
+def main() -> None:
+    response = invoke_text(
+        "你好，请用一句中文介绍一下大语言模型应用开发。",
+        model="gpt-3.5-turbo",
+        temperature=0.3,
+    )
+    print(response)
 
-os.environ["http_proxy"]="http://localhost:7890"
-os.environ["https_proxy"]="http://localhost:7890"
 
-model = ChatOpenAI(model="gpt-3.5-turbo")
-
-print(model.invoke("Hello, Langchain!").content)
+if __name__ == "__main__":
+    main()

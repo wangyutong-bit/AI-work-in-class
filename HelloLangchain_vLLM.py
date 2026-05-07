@@ -1,10 +1,17 @@
-from langchain_openai import ChatOpenAI
+from llm_client import invoke_text
 
-model = ChatOpenAI(
-    api_key="i_am_api_key",
-    base_url="http://127.0.0.1:6006/v1",
-    model="Qwen2.5-7B-AIGCCLASS")
 
-response = model.stream("你好, 介绍下简述Langchain的基本模块？")
-for chunk in response:
-    print(chunk.content, end="")
+def main() -> None:
+    response = invoke_text(
+        "你好，介绍一下 LangChain 的几个核心模块。",
+        model="Qwen2.5-7B-AIGCCLASS",
+        base_url="http://127.0.0.1:6006/v1",
+        api_key="i_am_api_key",
+        temperature=0.3,
+        max_tokens=800,
+    )
+    print(response)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,10 +1,17 @@
-from langchain_community.llms.vllm import VLLMOpenAI
+from llm_client import invoke_text
 
-model = VLLMOpenAI(openai_api_base="http://10.107.0.80:8080/v1",
-                 openai_api_key="NOPWD",
-                 model_name="qwen2-72b-int4",
-                 max_tokens=2000)
 
-responses = model.stream("请以我爱祖国为题目，写一篇1800字的作文")
-for partial in responses:
-    print(partial,end="")
+def main() -> None:
+    response = invoke_text(
+        "请以“我爱祖国”为题，写一篇 800 字左右的作文。",
+        model="qwen2-72b-int4",
+        base_url="http://10.107.0.80:8080/v1",
+        api_key="NOPWD",
+        temperature=0.7,
+        max_tokens=2000,
+    )
+    print(response)
+
+
+if __name__ == "__main__":
+    main()
