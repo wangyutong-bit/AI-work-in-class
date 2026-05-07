@@ -49,7 +49,7 @@ graph = graph_builder.compile()
 # 生成图结构的可视化图片并保存到磁盘
 image_data = graph.get_graph().draw_mermaid_png()
 # 指定保存图片的文件路径
-file_path = 'Agent\LCChatBotAgentBasic.png'  
+file_path = 'Agent\\LCChatBotAgentBasic.png'
 # 保存到磁盘
 with open(file_path, 'wb') as file:
     file.write(image_data)
@@ -68,3 +68,4 @@ while True:
 
 # response = llm.invoke([("user", "你好")])
 # print(response.content)
+#
